@@ -19,6 +19,8 @@ class IndexController(val repository: Repository) {
 
     @PostMapping("")
     fun getWebHook(@RequestBody inputData : Map<String, Object>){
-        repository.save(inputData)
+        val dataToSave = inputData.toMutableMap()
+        dataToSave["createAt"] = Date()
+        repository.save(dataToSave)
     }
 }
